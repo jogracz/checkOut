@@ -1,25 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import './App.css';
+import Cart from "./components/Cart";
+import CartContextProvider from "./context/CartContext";
+import PaymentForm from "./components/PaymentForm";
+import styled from "styled-components";
+
+const StyledApp = styled.div`
+  color: #444;
+  display: flex;
+  min-height: ${window.innerHeight};
+  padding: 5%;
+  justify-content: center;
+`;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <CartContextProvider>
+      <StyledApp>
+        <Router>
+          <Switch>
+            <Route exact path="/cart" component={Cart} />
+            <Route exact path="/payment" component={PaymentForm} />
+          </Switch>
+        </Router>
+      </StyledApp>
+    </CartContextProvider>
   );
 }
 
